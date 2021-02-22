@@ -1,0 +1,269 @@
+﻿@page
+@model CricketMatchAPI.Pages.IndexModel
+@{
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>player API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body style="background-color:darkgray;">
+    <div>
+        <!-- Navigation bar code -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <a class="navbar-brand" href="#">player Data</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <button class="btn btn-outline-dark" data-toggle="modal" data-target="#addplayer">Add New player</button>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- following division is creating main area of the web page where all player data will display -->
+        <div class="container">
+            <div class="row" id="allplayer">
+            </div>
+        </div>
+    </div>
+
+    <!-- below mentioned code will create the template to add a new player -->
+    <div class="modal" tabindex="-1" role="dialog" id="addplayer">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Players</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="player_Name">Player Name</label>
+                            <input type="text" class="form-control" id="player_Name" aria-describedby="player_NameHelp" placeholder="Enter player Name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Email">Email</label>
+                            <input type="text" class="form-control" id="player_Email" aria-describedby="player_EmailHelp" placeholder="Enter player Email">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Score">player_Score</label>
+                            <input type="text" class="form-control" id="player_Score" aria-describedby="player_ScoreHelp" placeholder="Enter player score">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="player_Age">player_Age</label>
+                            <input 0. class="form-control" id="player_Age" aria-describedby="player_AgeHelp" placeholder="Enter the player_Age">
+                        </div>
+                        <div class="form-group" id="result">
+
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="addplayer()">Add player</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- below mentioned code will create the template to Update a new book -->
+    <div class="modal" tabindex="-1" role="dialog" id="Updateplayer">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update player Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Update_id" aria-describedby="IdHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Name">player Name</label>
+                            <input type="text" class="form-control" id="Update_player_Name" aria-describedby="player_NameHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Email">Email</label>
+                            <input type="text" class="form-control" id="Update_player_Email" aria-describedby="player_EmailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Score">player_Score</label>
+                            <input type="text" class="form-control" id="Update_player_Score" aria-describedby="player_ScoreHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="player_Age">player_Age</label>
+                            <input type="text" class="form-control" id="Update_player_Age" aria-describedby="player_AgeHelp">
+                        </div>
+
+                        <div class="form-group" id="update_result">
+
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="updateplayer()">Update</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <! -- java script files that will help to link the front end and back end -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        var uri = 'api/Players';
+        //Java script main function so JS start from here
+        $(document).ready(function () {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#playerTemplate").tmpl(data).appendTo("#allplayer");
+                });
+        });
+
+        // function to get all player data and show on web page
+        function getAllplayer() {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#allplayer").text("");
+                    $("#playerTemplate").tmpl(data).appendTo("#allplayer");
+                });
+        }
+        // function to add data for new player
+        function addplayer() {
+            var _player_Name = $('#player_Name').val();
+            var _player_Email = $('#player_Email').val();
+            var _player_Score = $('#player_Score').val();
+            var _player_Age = $('#player_Age').val();
+            var player = {
+                player_Name: _player_Name,
+                player_Email: _player_Email,
+                player_Score: _player_Score,
+                player_Age: _player_Age
+            };
+            $.ajax({
+                type: "POST",
+                url: uri,
+                data: JSON.stringify(player),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#result").html("New player data is added successfully");
+                getAllplayer();
+            }).fail(function (jqXHR, textStatus) {
+                $("#result").html("An error occured when Adding the player record.");
+            });
+        }
+
+        //funtion to delete a particular player based on id
+        function remove(id) {
+            var yes = confirm("Are you sure you want to delete this player?");
+            if (yes) {
+                $.ajax({
+                    type: "DELETE",
+                    url: uri + "/" + id,
+                }).done(function (response) {
+                    $("#result").html("player data is deleted successfully");
+                    getAllplayer();
+                }).fail(function (jqXHR, textStatus) {
+                    $("#result").html("An error occured when deleting the player record.");
+                });
+            }
+        }
+
+        // funtion to fill the data into update template
+        function getplayerForUpdate(id) {
+            $.ajax({
+                type: "GET",
+                url: uri + "/" + id,
+                contentType: "application/json"
+            }).done(function (response) {
+                $('#Update_id').val(response.id);
+                $('#Update_player_Name').val(response.player_Name);
+                $('#Update_player_Email').val(response.player_Email);
+                $('#Update_player_Score').val(response.player_Score);
+                $('#Update_player_Age').val(response.player_Age);
+            });
+        }
+        // function to update data of the player
+        function updateplayer() {
+            var _player_Name = $('#Update_player_Name').val();
+            var _player_Email = $('#Update_player_Email').val();
+            var _player_Score = $('#Update_player_Score').val();
+            var _player_Age = $('#Update_player_Age').val();
+            var playerUpdate = {
+                id: parseInt($('#Update_id').val()),
+                player_Name: _player_Name,
+                player_Email: _player_Email,
+                player_Score: _player_Score,
+                player_Age: _player_Age
+            };
+            $.ajax({
+                type: "PUT",
+                url: uri + "/" + $('#Update_id').val(),
+                data: JSON.stringify(playerUpdate),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#update_result").html("Record is updated Successfully");
+                getAllplayer();
+            }).fail(function (jqXHR, textStatus) {
+                $("#update_result").html("An error occured when updating player record.");
+            });
+        }
+
+
+    </script>
+    <!-- below mentioned code will create the template on the web page to display all books -->
+    <script id="playerTemplate" type="text/x-jquery-tmpl">
+        <div class="col-lg-3" style="margin:10px;">
+            <div class="List group  List group  text-black bg-light border-dark mb-3" style="width: 18rem; padding:20px">
+                <ul class="List group">
+
+
+                    <li class="List group -item list-group-item-warning">player Name: ${player_Name}</li>
+                    <li class="List group -item list-group-item-primary">Email :  ${player_Email}</li>
+                    <li class="List group -item list-group-item-secondary">Score : ${player_Score}</li>
+                    <li class="List group -item list-group-item-dark">Age : ${player_Age}</li>
+                </ul>
+                <span>
+                    <button class="btn btn-warning" onclick="getplayerForUpdate('${id}')" data-toggle="modal" data-target="#Updateplayer">Update</button>
+                    <a href="#" class="btn btn-secondary" onclick="remove('${id}')">Delete</a>
+                </span>
+            </div>
+        </div>
+    </script>
+
+
+</body>
+</html>
