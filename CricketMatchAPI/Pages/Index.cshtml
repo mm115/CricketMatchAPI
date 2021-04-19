@@ -14,7 +14,7 @@
 
 <body style="background-color:darkgray;">
     <div>
-        <!-- Navigation bar code -->
+        <!-- Navigation bar code for main page -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
             <a class="navbar-brand" href="#">player Data</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -204,7 +204,7 @@
             }
         }
 
-        // funtion to fill the data into update template
+        // javascript funtion to fill the data into update template
         function getplayerForUpdate(id) {
             $.ajax({
                 type: "GET",
@@ -218,7 +218,7 @@
                 $('#Update_player_Age').val(response.player_Age);
             });
         }
-        // function to update data of the player
+        //javascript function to update data of the player
         function updateplayer() {
             var _player_Name = $('#Update_player_Name').val();
             var _player_Email = $('#Update_player_Email').val();
